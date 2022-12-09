@@ -2,6 +2,10 @@
   font-family: "Roboto", sans-serif;
   font-weight: 300;
   font-size: 14px;
+  width: 800px;
+  position: relative;
+  left: -300px;
+  top: 20px;
 }
 .location {
   font-size: 18px;
@@ -10,6 +14,9 @@
 .searchfield {
   text-align: right;
   padding-left: 40px;
+}
+.buttons {
+  padding-left: 4px;
 }
 .form-control {
   height: 30px;
@@ -46,5 +53,5 @@
   font-family: "Roboto", sans-serif;
   font-weight: 300;
   font-size: 11px;
-  padding: 10px 90px;
+  padding: 30px 50px;
 }

@@ -8,32 +8,32 @@ function displaySearch(event) {
 function getPosition(position) {
   let lat = position.coords.latitude;
   let lon = position.coords.longitude;
-  let apiKey = "9eca7aac0b071aa16e3cb063adba0785";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+  let apiKey = "bb1f9632a7o1b3d205df30t734b8a4da";
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?lon=${lon}&lat=${lat}&key=${apiKey}&units=metric`;
   axios.get(apiUrl).then(showCurrentTemperature);
 }
 
 function showCurrentTemperature(response) {
   let locationName = document.querySelector("#search-location");
-  document.querySelector("#search-location").innerHTML = response.data.name;
+  document.querySelector("#search-location").innerHTML = response.data.city;
   let locationTemperature = document.querySelector("#live-temperature");
-  let roundedTemp = Math.round(response.data.main.temp);
+  let roundedTemp = Math.round(response.data.temperature.day);
   locationTemperature.innerHTML = `${roundedTemp} °C`;
-  locationName.innerHTML = response.data.name;
+  locationName.innerHTML = response.data.city;
 }
 
 function getSearchTemperature(city) {
-  let apiKey = "9eca7aac0b071aa16e3cb063adba0785";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+  let apiKey = "bb1f9632a7o1b3d205df30t734b8a4da";
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
   axios.get(apiUrl).then(showSearchTemperature);
 }
 
 function showSearchTemperature(response) {
   let searchName = document.querySelector("#search-location");
   let searchTemperature = document.querySelector("#live-temperature");
-  let roundedTemp = Math.round(response.data.main.temp);
+  let roundedTemp = Math.round(response.data.temperature.current);
   searchTemperature.innerHTML = `${roundedTemp} °C`;
-  searchName.innerHTML = response.data.name;
+  searchName.innerHTML = response.data.city;
 }
 function getCurrentLocation(event) {
   event.preventDefault();
@@ -62,7 +62,7 @@ let weekdays = [
   "Wednesday",
   "Thursday",
   "Friday",
-  "Saturday"
+  "Saturday",
 ];
 
 let day = new Date();
