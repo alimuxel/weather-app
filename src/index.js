@@ -17,9 +17,9 @@ function showCurrentTemperature(response) {
   let locationName = document.querySelector("#search-location");
   document.querySelector("#search-location").innerHTML = response.data.city;
   let locationTemperature = document.querySelector("#live-temperature");
-  let roundedTemp = Math.round(response.data.temperature.day);
+  let roundedTemp = Math.round(response.data.daily[2].day);
   locationTemperature.innerHTML = `${roundedTemp} °C`;
-  locationName.innerHTML = response.data.city;
+  locationName.innerHTML = `${response.data.city}, ${response.data.country}`;
 }
 
 function getSearchTemperature(city) {
@@ -33,7 +33,7 @@ function showSearchTemperature(response) {
   let searchTemperature = document.querySelector("#live-temperature");
   let roundedTemp = Math.round(response.data.temperature.current);
   searchTemperature.innerHTML = `${roundedTemp} °C`;
-  searchName.innerHTML = response.data.city;
+  searchName.innerHTML = `${response.data.city}, ${response.data.country}`;
 }
 function getCurrentLocation(event) {
   event.preventDefault();
