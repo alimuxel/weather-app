@@ -17,9 +17,16 @@ function showCurrentTemperature(response) {
   let locationName = document.querySelector("#search-location");
   document.querySelector("#search-location").innerHTML = response.data.city;
   let locationTemperature = document.querySelector("#live-temperature");
-  let roundedTemp = Math.round(response.data.daily[2].day);
+  let roundedTemp = Math.round(response.data.temperature.current);
+  let weatherIcon = document.querySelector("#live-temperature-icon");
+  let liveCondition = document.querySelector("#live-condition");
   locationTemperature.innerHTML = `${roundedTemp} °C`;
   locationName.innerHTML = `${response.data.city}, ${response.data.country}`;
+  weatherIcon.setAttribute(
+    "src",
+    `http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.condition.icon}.png`
+  );
+  liveCondition.innerHTML = `${response.data.condition.description}`;
 }
 
 function getSearchTemperature(city) {
@@ -32,8 +39,16 @@ function showSearchTemperature(response) {
   let searchName = document.querySelector("#search-location");
   let searchTemperature = document.querySelector("#live-temperature");
   let roundedTemp = Math.round(response.data.temperature.current);
+  let weatherIcon = document.querySelector("#live-temperature-icon");
+  let liveCondition = document.querySelector("#live-condition");
+
   searchTemperature.innerHTML = `${roundedTemp} °C`;
   searchName.innerHTML = `${response.data.city}, ${response.data.country}`;
+  weatherIcon.setAttribute(
+    "src",
+    `http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.condition.icon}.png`
+  );
+  liveCondition.innerHTML = `${response.data.condition.description}`;
 }
 function getCurrentLocation(event) {
   event.preventDefault();
