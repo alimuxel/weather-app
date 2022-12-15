@@ -46,9 +46,7 @@ function showSearchTemperature(response) {
   let weatherIcon = document.querySelector("#live-temperature-icon");
   let humidity = document.querySelector("#humidity");
   let wind = document.querySelector("#wind");
-
-  let weatherAttributes = document.querySelector("#weather-attributes");
-
+  let liveCondition = document.querySelector("#live-condition");
   searchTemperature.innerHTML = `${roundedTemp} °C`;
   searchName.innerHTML = `${response.data.city}, ${response.data.country}`;
   weatherIcon.setAttribute(
