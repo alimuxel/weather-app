@@ -20,6 +20,8 @@ function showCurrentTemperature(response) {
   let roundedTemp = Math.round(response.data.temperature.current);
   let weatherIcon = document.querySelector("#live-temperature-icon");
   let liveCondition = document.querySelector("#live-condition");
+  let humidity = document.querySelector("#humidity");
+  let wind = document.querySelector("#wind");
   locationTemperature.innerHTML = `${roundedTemp} °C`;
   locationName.innerHTML = `${response.data.city}, ${response.data.country}`;
   weatherIcon.setAttribute(
@@ -27,6 +29,8 @@ function showCurrentTemperature(response) {
     `http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.condition.icon}.png`
   );
   liveCondition.innerHTML = `${response.data.condition.description}`;
+  humidity.innerHTML = `Humidity: ${response.data.temperature.humidity} %`;
+  wind.innerHTML = `Wind: ${response.data.wind.speed} kmh`;
 }
 
 function getSearchTemperature(city) {
@@ -40,7 +44,10 @@ function showSearchTemperature(response) {
   let searchTemperature = document.querySelector("#live-temperature");
   let roundedTemp = Math.round(response.data.temperature.current);
   let weatherIcon = document.querySelector("#live-temperature-icon");
-  let liveCondition = document.querySelector("#live-condition");
+  let humidity = document.querySelector("#humidity");
+  let wind = document.querySelector("#wind");
+
+  let weatherAttributes = document.querySelector("#weather-attributes");
 
   searchTemperature.innerHTML = `${roundedTemp} °C`;
   searchName.innerHTML = `${response.data.city}, ${response.data.country}`;
@@ -49,6 +56,8 @@ function showSearchTemperature(response) {
     `http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.condition.icon}.png`
   );
   liveCondition.innerHTML = `${response.data.condition.description}`;
+  humidity.innerHTML = `Humidity: ${response.data.temperature.humidity} %`;
+  wind.innerHTML = `Wind: ${response.data.wind.speed} kmh`;
 }
 function getCurrentLocation(event) {
   event.preventDefault();

@@ -26,6 +26,9 @@
   font-size: 32px;
   padding: 20px;
 }
+.attributes {
+  font-size: 14px;
+}
 .live-temperature-icon {
   font-size: 56px;
 }
