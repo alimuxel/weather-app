@@ -29,6 +29,18 @@
 .attributes {
   font-size: 14px;
 }
+.live-temperature {
+  text-decoration: none;
+}
+.live-temperature .active {
+  color: #000000;
+  cursor: default;
+  text-decoration: none;
+}
+
+.live-temperature .active:hover {
+  text-decoration: none;
+}
 .live-temperature-icon {
   font-size: 56px;
 }

@@ -1,3 +1,22 @@
+function convertToCelsius(event) {
+  event.preventDefault();
+  let temperatureElement = document.querySelector("#live-temperature");
+
+  celsiusTemp.classList.add("active");
+  fahrenheitTemp.classList.remove("active");
+  temperatureElement.innerHTML = Math.round(celsiusTemperature);
+}
+
+function convertToFahrenheit(event) {
+  event.preventDefault();
+  let temperatureElement = document.querySelector("#live-temperature");
+
+  celsiusTemp.classList.remove("active");
+  fahrenheitTemp.classList.add("active");
+  let fahrenheitTemp = (celsiusTemperature * 9) / 5 + 32;
+  temperatureElement.innerHTML = Math.round(fahrenheitTemp);
+}
+
 function displaySearch(event) {
   event.preventDefault();
   let searchInput = document.querySelector("#city-input");
@@ -22,7 +41,8 @@ function showCurrentTemperature(response) {
   let liveCondition = document.querySelector("#live-condition");
   let humidity = document.querySelector("#humidity");
   let wind = document.querySelector("#wind");
-  locationTemperature.innerHTML = `${roundedTemp} °C`;
+
+  locationTemperature.innerHTML = `${roundedTemp}`;
   locationName.innerHTML = `${response.data.city}, ${response.data.country}`;
   weatherIcon.setAttribute(
     "src",
@@ -31,6 +51,7 @@ function showCurrentTemperature(response) {
   liveCondition.innerHTML = `${response.data.condition.description}`;
   humidity.innerHTML = `Humidity: ${response.data.temperature.humidity} %`;
   wind.innerHTML = `Wind: ${response.data.wind.speed} kmh`;
+  celsiusTemperature = response.data.temperature.current;
 }
 
 function getSearchTemperature(city) {
@@ -47,7 +68,8 @@ function showSearchTemperature(response) {
   let humidity = document.querySelector("#humidity");
   let wind = document.querySelector("#wind");
   let liveCondition = document.querySelector("#live-condition");
-  searchTemperature.innerHTML = `${roundedTemp} °C`;
+
+  searchTemperature.innerHTML = `${roundedTemp}`;
   searchName.innerHTML = `${response.data.city}, ${response.data.country}`;
   weatherIcon.setAttribute(
     "src",
@@ -56,6 +78,7 @@ function showSearchTemperature(response) {
   liveCondition.innerHTML = `${response.data.condition.description}`;
   humidity.innerHTML = `Humidity: ${response.data.temperature.humidity} %`;
   wind.innerHTML = `Wind: ${response.data.wind.speed} kmh`;
+  celsiusTemperature = response.data.temperature.current;
 }
 function getCurrentLocation(event) {
   event.preventDefault();
@@ -86,6 +109,7 @@ let weekdays = [
   "Friday",
   "Saturday",
 ];
+let celsiusTemperature = null;
 
 let day = new Date();
 day.getDay([weekdays]);
@@ -100,3 +124,9 @@ search.addEventListener("submit", searchSubmit);
 
 let currentButton = document.querySelector("#current-Button");
 currentButton.addEventListener("click", getCurrentLocation);
+
+let celsiusTemp = document.querySelector("#celsius-temp");
+celsiusTemp.addEventListener("click", convertToCelsius);
+
+let fahrenheitTemp = document.querySelector("fahrenheit-temp");
+fahrenheitTemp.addEventListener("click", convertToFahrenheit);
