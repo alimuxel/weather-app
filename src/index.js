@@ -13,8 +13,8 @@ function convertToFahrenheit(event) {
 
   celsiusTemp.classList.remove("active");
   fahrenheitTemp.classList.add("active");
-  let fahrenheitTemp = (celsiusTemperature * 9) / 5 + 32;
-  temperatureElement.innerHTML = Math.round(fahrenheitTemp);
+  let temperature = (celsiusTemperature * 9) / 5 + 32;
+  temperatureElement.innerHTML = Math.round(temperature);
 }
 
 function displaySearch(event) {
@@ -128,5 +128,5 @@ currentButton.addEventListener("click", getCurrentLocation);
 let celsiusTemp = document.querySelector("#celsius-temp");
 celsiusTemp.addEventListener("click", convertToCelsius);
 
-let fahrenheitTemp = document.querySelector("fahrenheit-temp");
+let fahrenheitTemp = document.querySelector("#fahrenheit-temp");
 fahrenheitTemp.addEventListener("click", convertToFahrenheit);
