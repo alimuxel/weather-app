@@ -31,6 +31,13 @@ function getPosition(position) {
   let apiUrl = `https://api.shecodes.io/weather/v1/current?lon=${lon}&lat=${lat}&key=${apiKey}&units=metric`;
   axios.get(apiUrl).then(showCurrentTemperature);
 }
+function getCurrentForecast(coordinates) {
+  let lat = coordinates.latitude;
+  let lon = coordinates.longitude;
+  let apiKey = "bb1f9632a7o1b3d205df30t734b8a4da";
+  let apiUrl = `https://api.shecodes.io/weather/v1/forecast?lon=${lon}&lat=${lat}&key=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(showCurrentForecast);
+}
 
 function showCurrentTemperature(response) {
   let locationName = document.querySelector("#search-location");
@@ -52,12 +59,20 @@ function showCurrentTemperature(response) {
   humidity.innerHTML = `Humidity: ${response.data.temperature.humidity} %`;
   wind.innerHTML = `Wind: ${response.data.wind.speed} kmh`;
   celsiusTemperature = response.data.temperature.current;
+
+  getCurrentForecast(response.data.coordinates);
 }
 
 function getSearchTemperature(city) {
   let apiKey = "bb1f9632a7o1b3d205df30t734b8a4da";
   let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
   axios.get(apiUrl).then(showSearchTemperature);
+}
+
+function getSearchForecast(city) {
+  let apiKey = "bb1f9632a7o1b3d205df30t734b8a4da";
+  let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(showSearchForecast);
 }
 
 function showSearchTemperature(response) {
@@ -79,6 +94,8 @@ function showSearchTemperature(response) {
   humidity.innerHTML = `Humidity: ${response.data.temperature.humidity} %`;
   wind.innerHTML = `Wind: ${response.data.wind.speed} kmh`;
   celsiusTemperature = response.data.temperature.current;
+
+  getSearchForecast(response.data.city);
 }
 function getCurrentLocation(event) {
   event.preventDefault();
@@ -91,7 +108,41 @@ function searchSubmit(event) {
   getSearchTemperature(city);
 }
 
-function displayForecast() {
+function showSearchForecast() {
+  let forecastElement = document.querySelector("#forecast");
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+
+  let forecastHTML = `<div class="row">`;
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `
+            <div class="col">
+                <div class="row forecast-days">
+                <div class="col">Friday</div>
+                
+              </div>
+              <div class="row forecast-icon">
+                <div class="col">🌤</div>
+      
+              </div>
+              <div class="row forecast-temperature">
+                <div class="col">9 | 24°C</div>
+                </div>
+            </div>`;
+  });
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
+function showCurrentForecast() {
   let forecastElement = document.querySelector("#forecast");
   let days = [
     "Sunday",
@@ -165,5 +216,3 @@ celsiusTemp.addEventListener("click", convertToCelsius);
 
 let fahrenheitTemp = document.querySelector("#fahrenheit-temp");
 fahrenheitTemp.addEventListener("click", convertToFahrenheit);
-
-displayForecast();
