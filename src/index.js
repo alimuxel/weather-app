@@ -91,6 +91,41 @@ function searchSubmit(event) {
   getSearchTemperature(city);
 }
 
+function displayForecast() {
+  let forecastElement = document.querySelector("#forecast");
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+
+  let forecastHTML = `<div class="row">`;
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `
+            <div class="col">
+                <div class="row forecast-days">
+                <div class="col">Friday</div>
+                
+              </div>
+              <div class="row forecast-icon">
+                <div class="col">🌤</div>
+      
+              </div>
+              <div class="row forecast-temperature">
+                <div class="col">9 | 24°C</div>
+                </div>
+            </div>`;
+  });
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
+
 let time = new Date();
 let hours = time.getHours();
 if (hours < 10) {
@@ -130,3 +165,5 @@ celsiusTemp.addEventListener("click", convertToCelsius);
 
 let fahrenheitTemp = document.querySelector("#fahrenheit-temp");
 fahrenheitTemp.addEventListener("click", convertToFahrenheit);
+
+displayForecast();
