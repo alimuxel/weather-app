@@ -108,8 +108,9 @@ function searchSubmit(event) {
   getSearchTemperature(city);
 }
 
-function showSearchForecast() {
-  let forecastElement = document.querySelector("#forecast");
+function formatDay(time) {
+  let date = new Date(time * 1000);
+  let day = date.getDay();
   let days = [
     "Sunday",
     "Monday",
@@ -119,59 +120,74 @@ function showSearchForecast() {
     "Friday",
     "Saturday",
   ];
+  return days[day];
+}
+
+function showSearchForecast(response) {
+  let forecastElement = document.querySelector("#forecast");
+  let forecast = response.data.daily;
 
   let forecastHTML = `<div class="row">`;
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 6) {
+      forecastHTML =
+        forecastHTML +
+        `
             <div class="col">
                 <div class="row forecast-days">
-                <div class="col">Friday</div>
+                <div class="col">${formatDay(forecastDay.time)}</div>
                 
               </div>
               <div class="row forecast-icon">
-                <div class="col">🌤</div>
-      
+                <div class="col"></div>
+                  <img src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${
+                    forecastDay.condition.icon
+                  }.png" 
+                  alt="forecast_icon">
+
               </div>
               <div class="row forecast-temperature">
-                <div class="col">9 | 24°C</div>
+                <div class="col">${Math.round(
+                  forecastDay.temperature.minimum
+                )} | ${Math.round(forecastDay.temperature.maximum)}°C</div>
                 </div>
             </div>`;
+    }
   });
   forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
 }
-function showCurrentForecast() {
+
+function showCurrentForecast(response) {
   let forecastElement = document.querySelector("#forecast");
-  let days = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ];
+  let forecast = response.data.daily;
 
   let forecastHTML = `<div class="row">`;
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 6) {
+      forecastHTML =
+        forecastHTML +
+        `
             <div class="col">
                 <div class="row forecast-days">
-                <div class="col">Friday</div>
+                <div class="col">${formatDay(forecastDay.time)}</div>
                 
               </div>
               <div class="row forecast-icon">
-                <div class="col">🌤</div>
-      
+                <div class="col"></div>
+                  <img src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${
+                    forecastDay.condition.icon
+                  }.png" 
+                  alt="forecast_icon">
+
               </div>
               <div class="row forecast-temperature">
-                <div class="col">9 | 24°C</div>
+                <div class="col">${Math.round(
+                  forecastDay.temperature.minimum
+                )} | ${Math.round(forecastDay.temperature.maximum)}°C</div>
                 </div>
             </div>`;
+    }
   });
   forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
