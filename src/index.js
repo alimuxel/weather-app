@@ -57,7 +57,7 @@ function showCurrentTemperature(response) {
   );
   liveCondition.innerHTML = `${response.data.condition.description}`;
   humidity.innerHTML = `Humidity: ${response.data.temperature.humidity} %`;
-  wind.innerHTML = `Wind: ${response.data.wind.speed} kmh`;
+  wind.innerHTML = `Wind: ${response.data.wind.speed} km/h`;
   celsiusTemperature = response.data.temperature.current;
 
   getCurrentForecast(response.data.coordinates);
@@ -92,7 +92,7 @@ function showSearchTemperature(response) {
   );
   liveCondition.innerHTML = `${response.data.condition.description}`;
   humidity.innerHTML = `Humidity: ${response.data.temperature.humidity} %`;
-  wind.innerHTML = `Wind: ${response.data.wind.speed} kmh`;
+  wind.innerHTML = `Wind: ${response.data.wind.speed} km/h`;
   celsiusTemperature = response.data.temperature.current;
 
   getSearchForecast(response.data.city);

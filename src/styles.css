@@ -7,6 +7,9 @@
   left: -300px;
   top: 20px;
 }
+.card {
+  background-color: #fcfcfb;
+}
 .location {
   font-size: 18px;
   font-weight: 400;
